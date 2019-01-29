@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+    - "node"
+    - "10"
+    - "9"
+    - "8"
+    - "7"
+    - "6"
+    - "6.7"
+    - "5"
+    - "4"
+script:
+  - make check -C test
+  - echo "running tests again for CI log - failing tests here are expected"
+  - node_modules/.bin/iced test/run.iced || true
+notifications:
+  email: false

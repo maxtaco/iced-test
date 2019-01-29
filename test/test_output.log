@@ -1,0 +1,112 @@
+  ☑ ran init for async_failure.iced
+  ☑ this is test1
+✔ async_failure.iced: test1
+:: Recovering from async exception: ReferenceError: hello is not defined
+:: Testing may become unstable from now on.
+at /iced-test/test/async_failure.iced:17:11
+In async_failure.iced/test_exception: ReferenceError: hello is not defined
+✖ TESTFAIL async_failure.iced: test_exception
+  ☑ this is test2
+✔ async_failure.iced: test2
+  ☑ and still ran the destructor for async_failure.iced
+- In undefined: 0 != 1 (at /iced-test/test/errors.iced:7:5)
+- Assertion failed: undefined (at /iced-test/test/errors.iced:8:5)
+- hey! (at /iced-test/test/errors.iced:9:5)
+- null (at /iced-test/test/errors.iced:10:5)
+- Error: hey! (at /iced-test/test/errors.iced:11:5)
+✖ TESTFAIL errors.iced: test1
+In errors.iced/fail_in_cb: Error: failure
+✖ TESTFAIL errors.iced: fail_in_cb
+When importing test file 'import_failure.iced' (not running tests yet):
+In reading /iced-test/test/import_failure.iced: ReferenceError: bar is not defined
+ReferenceError: bar is not defined
+  at Object.<anonymous> (/iced-test/test/import_failure.iced:4:1)
+  at Object.<anonymous> (/iced-test/test/import_failure.iced:3:1)
+  at Module._compile (module.js:652:30)
+  at Object.loadFile (/home/zapu/Projects/iced-test/node_modules/iced-coffee-script/lib/coffee-script/register.js:18:19)
+  at Module.load (/home/zapu/Projects/iced-test/node_modules/iced-coffee-script/lib/coffee-script/register.js:47:36)
+  at tryModuleLoad (module.js:505:12)
+  at Function.Module._load (module.js:497:3)
+  at Module.require (module.js:596:17)
+  at require (internal/module.js:11:18)
+  at /home/zapu/Projects/iced-test/index.iced:304:13
+  at ServerRunner.exports.ServerRunner.ServerRunner.run_file (/home/zapu/Projects/iced-test/index.iced:317:7)
+  at /home/zapu/Projects/iced-test/index.iced:141:14
+  at _while (/home/zapu/Projects/iced-test/index.iced:141:7)
+  at /home/zapu/Projects/iced-test/index.iced:140:15
+  at Object.trampoline (/home/zapu/Projects/iced-test/node_modules/iced-runtime/lib/runtime.js:64:14)
+  at _continue (/home/zapu/Projects/iced-test/index.iced:140:15)
+  at Deferrals.exports.Deferrals.Deferrals._call (/home/zapu/Projects/iced-test/node_modules/iced-runtime/lib/runtime.js:86:16)
+  at /home/zapu/Projects/iced-test/node_modules/iced-runtime/lib/runtime.js:98:26
+  at trampoline (/home/zapu/Projects/iced-test/node_modules/iced-runtime/lib/runtime.js:64:14)
+  at Deferrals.exports.Deferrals.Deferrals._fulfill (/home/zapu/Projects/iced-test/node_modules/iced-runtime/lib/runtime.js:96:16)
+  at ret (/home/zapu/Projects/iced-test/node_modules/iced-runtime/lib/runtime.js:29:18)
+  at /home/zapu/Projects/iced-test/index.iced:318:5
+  at Deferrals.exports.Deferrals.Deferrals._call (/home/zapu/Projects/iced-test/node_modules/iced-runtime/lib/runtime.js:86:16)
+  at /home/zapu/Projects/iced-test/node_modules/iced-runtime/lib/runtime.js:98:26
+  at trampoline (/home/zapu/Projects/iced-test/node_modules/iced-runtime/lib/runtime.js:64:14)
+  at Deferrals.exports.Deferrals.Deferrals._fulfill (/home/zapu/Projects/iced-test/node_modules/iced-runtime/lib/runtime.js:96:16)
+  at ret (/home/zapu/Projects/iced-test/node_modules/iced-runtime/lib/runtime.js:29:18)
+  at /home/zapu/Projects/iced-test/index.iced:242:5
+  at Deferrals.exports.Deferrals.Deferrals._call (/home/zapu/Projects/iced-test/node_modules/iced-runtime/lib/runtime.js:86:16)
+  at /home/zapu/Projects/iced-test/node_modules/iced-runtime/lib/runtime.js:98:26
+  at trampoline (/home/zapu/Projects/iced-test/node_modules/iced-runtime/lib/runtime.js:64:14)
+  at Deferrals.exports.Deferrals.Deferrals._fulfill (/home/zapu/Projects/iced-test/node_modules/iced-runtime/lib/runtime.js:96:16)
+  at /home/zapu/Projects/iced-test/index.iced:238:7
+  at _this._file_states.(anonymous function) (/home/zapu/Projects/iced-test/index.iced:438:19)
+  at /home/zapu/Projects/iced-test/index.iced:440:15
+  at _while (/home/zapu/Projects/iced-test/index.iced:218:21)
+  at /home/zapu/Projects/iced-test/index.iced:218:21
+  at Object.trampoline (/home/zapu/Projects/iced-test/node_modules/iced-runtime/lib/runtime.js:64:14)
+  at _continue (/home/zapu/Projects/iced-test/index.iced:218:21)
+  at /home/zapu/Projects/iced-test/index.iced:401:30
+  at Deferrals.exports.Deferrals.Deferrals._call (/home/zapu/Projects/iced-test/node_modules/iced-runtime/lib/runtime.js:86:16)
+  at /home/zapu/Projects/iced-test/node_modules/iced-runtime/lib/runtime.js:98:26
+  at trampoline (/home/zapu/Projects/iced-test/node_modules/iced-runtime/lib/runtime.js:64:14)
+  at Deferrals.exports.Deferrals.Deferrals._fulfill (/home/zapu/Projects/iced-test/node_modules/iced-runtime/lib/runtime.js:96:16)
+  at ServerRunner.ret (/home/zapu/Projects/iced-test/node_modules/iced-runtime/lib/runtime.js:29:18)
+  at /home/zapu/Projects/iced-test/index.iced:162:13
+  at /iced-test/test/errors.iced:17:3
+  at Deferrals.exports.Deferrals.Deferrals._call (/home/zapu/Projects/iced-test/node_modules/iced-runtime/lib/runtime.js:86:16)
+  at /home/zapu/Projects/iced-test/node_modules/iced-runtime/lib/runtime.js:98:26
+  at trampoline (/home/zapu/Projects/iced-test/node_modules/iced-runtime/lib/runtime.js:64:14)
+  at Deferrals.exports.Deferrals.Deferrals._fulfill (/home/zapu/Projects/iced-test/node_modules/iced-runtime/lib/runtime.js:96:16)
+  at Timeout.ret [as _onTimeout] (/home/zapu/Projects/iced-test/node_modules/iced-runtime/lib/runtime.js:29:18)
+  at ontimeout (timers.js:498:11)
+  at tryOnTimeout (timers.js:323:5)
+  at Timer.listOnTimeout (timers.js:290:5)
+
+Failed to initialize file init_failure.iced: Error: init failed
+  ☑ ran init for passing.iced
+  ☑ t1 waypoint
+✔ passing.iced: t1
+  ☑ t2 waypoint, doesn't matter
+✔ passing.iced: t2
+  ☑ and still ran the destructor for passing.iced
+  ☑ ran init for sync_failure.iced
+  ☑ test before the exception
+✔ sync_failure.iced: before
+:: Caught sync exception: ReferenceError: hello is not defined
+at exports.test_exception (/iced-test/test/sync_failure.iced:18:11)
+In sync_failure.iced/test_exception: ReferenceError: hello is not defined
+✖ TESTFAIL sync_failure.iced: test_exception
+  ☑ test after the exception
+✔ sync_failure.iced: after
+  ☑ and still ran the destructor for sync_failure.iced
+  ☑ ran init for timeout.iced
+  ☑ test before the exception
+✔ timeout.iced: before
+  ☑ we are never returning from this one!
+:: Recovering from a timeout in test function.
+:: Testing may become unstable from now on.
+In timeout.iced/timeouting_function: Error: timeout
+✖ TESTFAIL timeout.iced: timeouting_function
+  ☑ test after the exception
+✔ timeout.iced: after
+  ☑ and still ran the destructor for timeout.iced
+✖ Failure due to test configuration issues
+Tests: 8/13 passed
+ -> Only 5/7 files ran properly
+Failed in files (pass as arguments to runner to retry):
+  async_failure.iced errors.iced import_failure.iced init_failure.iced sync_failure.iced timeout.iced
+
