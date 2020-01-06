@@ -50,7 +50,7 @@
     }
     if (typeof module !== "undefined" && module !== null ? module.filename : void 0) {
       lines = stacklines.filter(function(x) {
-        return x.indexOf(module.filename) === -1;
+        return x.indexOf(path.dirname(module.filename)) === -1;
       });
       if ((s2 = lines != null ? (_ref1 = lines[0]) != null ? _ref1.trim() : void 0 : void 0) && s2 !== s1) {
         ret.unshift(s2);

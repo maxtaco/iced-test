@@ -28,7 +28,7 @@ get_relevant_stack_frames = (filepath, err) ->
 
   # Also try to find first frame outside of iced-test
   if module?.filename
-    lines = stacklines.filter (x) -> x.indexOf(module.filename) is -1
+    lines = stacklines.filter (x) -> x.indexOf(path.dirname(module.filename)) is -1
     ret.unshift s2 if (s2 = lines?[0]?.trim()) and s2 isnt s1
 
   return ret
