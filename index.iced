@@ -8,6 +8,8 @@ util = require 'util'
 CHECK = "\u2714"
 BAD_X = "\u2716"
 WAYPOINT = "\u2611"
+RETRY = "🤔"
+RETRY_FAIL = "🤮"
 
 ##-----------------------------------------------------------------------
 
@@ -141,6 +143,23 @@ exports.Case = class Case
 
   waypoint : (m) -> @file.waypoint m
 
+##-----------------------------------------------------------------------
+
+exports.Flaker = class Flaker
+
+  constructor : ({budget, hook}) ->
+    @_budget = budget
+    @_hook = hook
+    @_flakes = 0
+
+  hit_flake : ({file, test_case, log}, cb) ->
+    @_flakes++
+    await @_hook? { file, test_case }, defer tmp
+    if tmp?
+      log "Error running flake hook: #{tmp.toString()}"
+    cb null
+
+  has_budget : () -> @_flakes < @_budget
 
 ##-----------------------------------------------------------------------
 
@@ -148,7 +167,7 @@ class Runner
 
   ##-----------------------------------------
 
-  constructor : ->
+  constructor : (opts) ->
     @_files = []
     @_launches = 0
     @_tests = 0
@@ -161,6 +180,9 @@ class Runner
     @_failures = []
 
     @_filter_pattern = null # only run test function matching this pattern (if present)
+
+    @_flaker = opts?.flaker
+
 
   ##-----------------------------------------
 
@@ -223,6 +245,27 @@ class Runner
       console.log format_stack(err)
       cb err
 
+  ##-----------------------------------------
+
+  run_case_once : ({func, fn, fo}, cb) ->
+    C = fo.new_case()
+    await @run_test_case_guarded func, C, defer err
+    cb err, C.is_ok()
+
+  ##-----------------------------------------
+
+  run_case_with_retries : ({func, fo, fn, k}, cb) ->
+    await @run_case_once {func, fn, fo}, defer err, ok
+    if (err? or not ok) and @_flaker?.has_budget()
+      @log "#{RETRY} retrying test case, maybe it is a flake (#{fn}/#{k})", { yellow : true }
+      await @run_case_once {func, fn, fo}, defer err, ok
+      if not err? and ok 
+        await @_flaker.hit_flake { file : fn, test_case : k, @log }, defer err
+      else @log "#{RETRY_FAIL} test case failed on second run (#{fn}/#{k})",  { red : true }
+    cb err, ok
+
+  ##-----------------------------------------
+
   run_code : (fn, code, cb) ->
     fo = @new_file_obj fn
 
@@ -248,9 +291,8 @@ class Runner
           continue
 
         @_tests++
-        C = fo.new_case()
 
-        await @run_test_case_guarded func, C, defer err
+        await @run_case_with_retries {fn, func, fo, k}, defer err, ok
 
         if err
           @err "In #{fn}/#{k}: #{err.toString()}"
@@ -266,7 +308,7 @@ class Runner
           else
             @log "Value passed as error is of type: #{tof}", { red : true }
 
-        if C.is_ok() and not err
+        if ok and not err?
           @_successes++
           @report_good_outcome "#{CHECK} #{fn}: #{k}"
         else
@@ -335,8 +377,8 @@ exports.ServerRunner = class ServerRunner extends Runner
 
   ##-----------------------------------------
 
-  constructor : () ->
-    super()
+  constructor : (opts) ->
+    super(opts)
 
   ##-----------------------------------------
 
@@ -361,11 +403,12 @@ exports.ServerRunner = class ServerRunner extends Runner
 
   ##-----------------------------------------
 
-  log : (msg, { green, red, bold, underline })->
+  log : (msg, { green, red, yellow, bold, underline })->
     # Note: all of this works with 'colors' package altering `String` prototype
     msg = msg.green if green
     msg = msg.bold if bold
     msg = msg.red if red
+    msg = msg.yellow if yellow
     msg = msg.underline if underline
     console.log msg
 
