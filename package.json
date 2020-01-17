@@ -1,6 +1,6 @@
 {
   "name": "iced-test",
-  "version": "0.0.30",
+  "version": "1.0.0",
   "description": "A testing class written with IcedCoffeeScript",
   "homepage": "https://github.com/maxtaco/iced-test",
   "main": "./index.js",
